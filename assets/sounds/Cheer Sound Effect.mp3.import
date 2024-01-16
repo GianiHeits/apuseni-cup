@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cheer Sound Effect.mp3-ac77e0d5f82446c3d875d2becd29d69e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Cheer Sound Effect.mp3"
+dest_files=[ "res://.import/Cheer Sound Effect.mp3-ac77e0d5f82446c3d875d2becd29d69e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

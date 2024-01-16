@@ -1,0 +1,205 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/Spawner.gd" type="Script" id=1]
+[ext_resource path="res://src/scene/RaceStartSprites2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sounds/Grieg - In the Hall of the Mountain King.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/Cheer Sound Effect.mp3" type="AudioStream" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/ui/EndScreen.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1.7, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="RaceEndSprites" parent="." instance=ExtResource( 2 )]
+position = Vector2( 512, 152 )
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TimerContainer" type="MarginContainer" parent="UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -208.0
+margin_right = 208.0
+margin_bottom = 52.0
+custom_constants/margin_top = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TimerContainer"]
+margin_top = 20.0
+margin_right = 416.0
+margin_bottom = 52.0
+custom_constants/separation = 25
+
+[node name="Time" type="Label" parent="UI/TimerContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 416.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Press Down Arrow to Start"
+align = 1
+valign = 1
+
+[node name="Warning" type="Label" parent="UI/TimerContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 57.0
+margin_right = 416.0
+margin_bottom = 89.0
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+custom_fonts/font = SubResource( 4 )
+text = "Warning!"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TimerContainer/VBoxContainer/Warning"]
+anims/RESET = SubResource( 1 )
+anims/Show = SubResource( 2 )
+
+[node name="EndScreen" parent="UI/TimerContainer/VBoxContainer" instance=ExtResource( 7 )]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 57.0
+margin_right = 416.0
+margin_bottom = 457.0
+
+[node name="CompletionContainer" type="MarginContainer" parent="UI"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -300.0
+margin_bottom = 300.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 50
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CompletionContainer"]
+margin_left = 5.0
+margin_top = 50.0
+margin_right = 55.0
+margin_bottom = 550.0
+
+[node name="SpeedLabel" type="Label" parent="UI/CompletionContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 50.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "0 mps"
+align = 1
+valign = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/CompletionContainer/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_top = 18.0
+margin_right = 50.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 50, 0 )
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+max_value = 750.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Level1" type="Timer" parent="Timers"]
+wait_time = 17.5
+one_shot = true
+
+[node name="Level2" type="Timer" parent="Timers"]
+wait_time = 34.0
+one_shot = true
+
+[node name="Level3" type="Timer" parent="Timers"]
+wait_time = 51.0
+one_shot = true
+
+[node name="Level4" type="Timer" parent="Timers"]
+wait_time = 84.0
+one_shot = true
+
+[node name="Level5" type="Timer" parent="Timers"]
+wait_time = 98.0
+one_shot = true
+
+[node name="Level6" type="Timer" parent="Timers"]
+wait_time = 111.0
+one_shot = true
+
+[node name="Level7" type="Timer" parent="Timers"]
+wait_time = 122.0
+one_shot = true
+
+[node name="RampSpawner" type="Timer" parent="Timers"]
+wait_time = 8.5
+one_shot = true
+
+[node name="DependentTimers" type="Node" parent="."]
+
+[node name="StoneSpawner" type="Timer" parent="DependentTimers"]
+one_shot = true
+
+[node name="MainTheme" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 20.0
+
+[node name="Celebration" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 20.0

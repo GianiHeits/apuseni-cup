@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Retro Game Coin Sound Effect.mp3-00032cef7cd7485fdf86708c8b565fcb.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Retro Game Coin Sound Effect.mp3"
+dest_files=[ "res://.import/Retro Game Coin Sound Effect.mp3-00032cef7cd7485fdf86708c8b565fcb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
