@@ -36,9 +36,6 @@ func update_scores():
 		$"%SubmitContainer".visible = false
 		$"%AlreadySubmitted".visible = true
 
-func _on_retry_pressed():
-	GameState._on_reset_button_pressed()
-
 func _on_SubmitButton_pressed():
 	var metadata = {
 		"total_distance": GameState.total_distance,
@@ -59,3 +56,6 @@ func _on_PlayerName_text_changed(new_text):
 		$"%SubmitButton".disabled = false
 	else:
 		$"%SubmitButton".disabled = true
+
+func _on_Button_pressed():
+	GameState._on_reset_button_pressed()

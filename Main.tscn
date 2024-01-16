@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Spawner.gd" type="Script" id=1]
 [ext_resource path="res://src/scene/RaceStartSprites2.tscn" type="PackedScene" id=2]
@@ -9,7 +9,10 @@
 [ext_resource path="res://src/ui/EndScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/ui/TutorialScreen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/sprites/bar_outer.png" type="Texture" id=10]
 [ext_resource path="res://src/ui/Leaderboard.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/sprites/bar_filling.png" type="Texture" id=12]
+[ext_resource path="res://Timer.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -57,10 +60,10 @@ script = ExtResource( 5 )
 position = Vector2( 512, 152 )
 
 [node name="Spawner" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource( 1 )
 
 [node name="Player" parent="Spawner" instance=ExtResource( 8 )]
-position = Vector2( 512, 208 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -5
@@ -93,7 +96,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "Press Down Arrow to Start"
 align = 1
-valign = 1
+script = ExtResource( 13 )
 
 [node name="Warning" type="Label" parent="UI/TimerContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -111,16 +114,6 @@ valign = 1
 anims/RESET = SubResource( 1 )
 anims/Show = SubResource( 2 )
 
-[node name="EndScreen" parent="UI/TimerContainer/VBoxContainer" instance=ExtResource( 7 )]
-visible = false
-margin_top = 57.0
-margin_right = 416.0
-margin_bottom = 457.0
-
-[node name="EndScreen" parent="UI" instance=ExtResource( 7 )]
-unique_name_in_owner = true
-visible = false
-
 [node name="Leaderboard" parent="UI" instance=ExtResource( 11 )]
 unique_name_in_owner = true
 visible = false
@@ -132,10 +125,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -60.0
+margin_left = -90.0
 margin_top = -300.0
 margin_bottom = 300.0
-custom_constants/margin_right = 5
+custom_constants/margin_right = 0
 custom_constants/margin_top = 50
 custom_constants/margin_left = 5
 custom_constants/margin_bottom = 50
@@ -143,29 +136,39 @@ custom_constants/margin_bottom = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CompletionContainer"]
 margin_left = 5.0
 margin_top = 50.0
-margin_right = 55.0
+margin_right = 90.0
 margin_bottom = 550.0
 
 [node name="SpeedLabel" type="Label" parent="UI/CompletionContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 50.0
+margin_right = 85.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "0 mps"
 align = 1
 valign = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/CompletionContainer/VBoxContainer"]
+[node name="ProgressBar" type="TextureProgress" parent="UI/CompletionContainer/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 22.0
 margin_top = 18.0
-margin_right = 50.0
-margin_bottom = 500.0
-rect_min_size = Vector2( 50, 0 )
-size_flags_vertical = 3
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+margin_right = 62.0
+margin_bottom = 468.0
+rect_min_size = Vector2( 40, 450 )
+size_flags_horizontal = 4
 max_value = 750.0
+step = 0.01
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 12 )
+fill_mode = 2
+tint_under = Color( 0.666667, 0.666667, 0.666667, 0.784314 )
+tint_progress = Color( 0.627451, 1, 0.729412, 1 )
+nine_patch_stretch = true
+
+[node name="EndScreen" parent="UI" instance=ExtResource( 7 )]
+unique_name_in_owner = true
+visible = false
+leaderboard_path = NodePath("../Leaderboard")
 
 [node name="Timers" type="Node" parent="."]
 
@@ -215,7 +218,17 @@ volume_db = 20.0
 stream = ExtResource( 4 )
 pitch_scale = 20.0
 
+[connection signal="player_hit_obstacle" from="Spawner/Player" to="." method="_on_Player_player_hit_obstacle"]
 [connection signal="player_started_game" from="Spawner/Player" to="." method="_on_Player_player_started_game"]
 [connection signal="pressed" from="UI/TutorialScreen/VBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
+[connection signal="timeout" from="Timers/Level1" to="." method="_on_level_1_timeout"]
+[connection signal="timeout" from="Timers/Level2" to="." method="_on_level_2_timeout"]
+[connection signal="timeout" from="Timers/Level3" to="." method="_on_level_3_timeout"]
+[connection signal="timeout" from="Timers/Level4" to="." method="_on_level_4_timeout"]
+[connection signal="timeout" from="Timers/Level5" to="." method="_on_level_5_timeout"]
+[connection signal="timeout" from="Timers/Level6" to="." method="_on_level_6_timeout"]
+[connection signal="timeout" from="Timers/Level7" to="." method="_on_level_7_timeout"]
+[connection signal="timeout" from="Timers/RampSpawner" to="." method="_on_ramp_spawner_timeout"]
+[connection signal="timeout" from="DependentTimers/StoneSpawner" to="." method="_on_stone_spawner_timeout"]
 
 [editable path="UI/TutorialScreen"]

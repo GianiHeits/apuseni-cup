@@ -18,8 +18,6 @@ var stone_type = "Stone"
 var spawned_end_screen = false
 
 func _ready():
-	print(GameState.highscore_submitted, GameState.highscore)
-	
 	progress_bar.max_value = main_theme_total_time
 	
 	if GameState.seen_tutorial:
@@ -49,7 +47,7 @@ func _process(_delta):
 	
 	if main_theme_time >= main_theme_total_time:
 		celebration.play(1)
-		_on_player_player_hit_obstacle()
+		_on_Player_player_hit_obstacle()
 	
 	if accelerate_player and int(GameState.total_time * 10) % 10 == 0:
 		GameState.move_speed_y += GameState.acceleartion
@@ -66,17 +64,6 @@ func _on_pause_button_pressed():
 			timer.paused = true
 	else:
 		_on_resume_pressed()
-
-func _on_player_player_hit_obstacle():
-	GameState.completion = (main_theme_time / main_theme_total_time) * 100
-	GameState.max_player_speed = max_player_speed
-	GameState.total_distance = distance
-	
-	GameState.game_paused = true
-	GameState.game_over = true
-	
-	main_theme.stop()
-	end_screen._on_game_over()
 
 func _on_resume_pressed():
 	main_theme.play(main_theme_time)
@@ -158,3 +145,14 @@ func _on_Player_player_started_game():
 	
 	main_theme.play(main_theme_time)
 	GameState.game_started = true
+
+func _on_Player_player_hit_obstacle():
+	GameState.completion = (main_theme_time / main_theme_total_time) * 100
+	GameState.max_player_speed = max_player_speed
+	GameState.total_distance = distance
+	
+	GameState.game_paused = true
+	GameState.game_over = true
+	
+	main_theme.stop()
+	end_screen._on_game_over()

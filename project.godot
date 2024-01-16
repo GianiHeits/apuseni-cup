@@ -22,6 +22,11 @@ Utils="*res://src/autoloads/Utils.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 BadWordsFilter="*res://addons/badwordsfilter/bad_words_filter.gd"
 
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/silent_wolf/plugin.cfg" )

@@ -77,13 +77,13 @@ func spawn_objects(nb_of_objects, object_type, min_row):
 func spawn_object_at_end(object_type, random_positions=false):
 	var object = null
 	if object_type == "RaceEnd":
-		object = RaceEndScene.instantiate()
+		object = RaceEndScene.instance()
 	elif object_type == "Ramp":
-		object = RampScene.instantiate()
+		object = RampScene.instance()
 	elif object_type == "Stone":
-		object = StoneScene.instantiate()
+		object = StoneScene.instance()
 	elif object_type == "BiggerStone":
-		object = BiggerStoneScene.instantiate()
+		object = BiggerStoneScene.instance()
 	
 	add_child(object)
 	
@@ -101,9 +101,9 @@ func spawn_object_at_end(object_type, random_positions=false):
 func spawn_object_at_beggining(object_type, random_positions=false):
 	var object = null
 	if object_type == "Yeti":
-		object = YetiScene.instantiate()
+		object = YetiScene.instance()
 	elif object_type == "Avalanche":
-		object = AvalancheScene.instantiate()
+		object = AvalancheScene.instance()
 	
 	add_child(object)
 	

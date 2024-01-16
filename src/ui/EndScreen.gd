@@ -1,6 +1,6 @@
 extends Panel
 
-onready var leaderboard_path
+export(NodePath) onready var leaderboard_path = get_node(leaderboard_path)
 
 
 func _input(event):
@@ -27,9 +27,9 @@ func _on_game_over():
 	
 	leaderboard_path.update_scores()
 
-func _on_leaderboard_pressed():
-	leaderboard_path.visible = true
-	self.visible = false
-
 func _on_Retry_pressed():
 	GameState._on_reset_button_pressed()
+
+func _on_Laderboard_pressed():
+	leaderboard_path.visible = true
+	self.visible = false

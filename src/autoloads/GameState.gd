@@ -18,6 +18,7 @@ var move_speed_y = 20
 var game_started = false
 var game_paused = true
 var game_over = false
+var can_start = false
 
 var total_distance = 0
 var total_time = 0
@@ -36,7 +37,7 @@ func _ready():
 		"api_key": "SkOfT0hIIA9tN8aZkkuzR9cox8SqDjqjaNfzKTMj",
 		"game_id": "apusenicup35",
 		"game_version": "1.0.0",
-		"log_level": 1
+		"log_level": 0
 	})
 
 func _on_reset_button_pressed():
@@ -60,7 +61,8 @@ func reset_state():
 	max_player_speed = 0
 	bonus_points = 0
 	
+	move_speed_y = 0
+	
 	game_started = false
 	game_paused = true
 	game_over = false
-	move_speed_y = 20

@@ -44,6 +44,7 @@ tracks/0/keys = {
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 3 )
+has_bonus_speed = true
 
 [node name="Variations" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
@@ -70,6 +71,7 @@ shape = SubResource( 1 )
 
 [node name="TrailEffect" parent="." instance=ExtResource( 4 )]
 z_index = -1
+is_npc = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
