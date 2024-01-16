@@ -1,4 +1,4 @@
-extends Marker2D
+extends Position2D
 
 var points = 200
 

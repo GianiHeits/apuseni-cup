@@ -1,6 +1,6 @@
 extends Panel
 
-export(NodePath) onready var leaderboard_path = get_node(leaderboard_path)
+onready var leaderboard_path
 
 
 func _input(event):

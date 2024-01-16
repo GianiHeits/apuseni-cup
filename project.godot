@@ -20,6 +20,7 @@ Constants="*res://src/autoloads/Constants.gd"
 GameState="*res://src/autoloads/GameState.gd"
 Utils="*res://src/autoloads/Utils.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+BadWordsFilter="*res://addons/badwordsfilter/bad_words_filter.gd"
 
 [editor_plugins]
 

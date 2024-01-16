@@ -33,11 +33,11 @@ onready var player_position = Vector2(viewport_size.x / 2, viewport_size.y / 3)
 
 func _ready():
 	SilentWolf.configure({
-	"api_key": "SkOfT0hIIA9tN8aZkkuzR9cox8SqDjqjaNfzKTMj",
-	"game_id": "ApuseniCup",
-	"game_version": "1.0.2",
-	"log_level": 1
-  })
+		"api_key": "SkOfT0hIIA9tN8aZkkuzR9cox8SqDjqjaNfzKTMj",
+		"game_id": "apusenicup35",
+		"game_version": "1.0.0",
+		"log_level": 1
+	})
 
 func _on_reset_button_pressed():
 	attempts += 1

@@ -23,11 +23,11 @@ func _ready():
 	progress_bar.max_value = main_theme_total_time
 	
 	if GameState.seen_tutorial:
-		_on_tutorial_button_button_down()
+		_on_TutorialButton_pressed()
 
 func _input(event):
 	if event.is_action_pressed("ui_accept") and $"%TutorialScreen".visible:
-		_on_tutorial_button_button_down()
+		_on_TutorialButton_pressed()
 	if event.is_action_pressed("ui_cancel"):
 		_on_pause_button_pressed()
 
@@ -77,18 +77,6 @@ func _on_player_player_hit_obstacle():
 	
 	main_theme.stop()
 	end_screen._on_game_over()
-
-func _on_player_player_started_game():
-	for timer in $Timers.get_children():
-		timer.start()
-	
-	main_theme.play(main_theme_time)
-	GameState.game_started = true
-
-func _on_tutorial_button_button_down():
-	GameState.seen_tutorial = true
-	$"%TutorialScreen".visible = false
-	$"%Time".visible = true
 
 func _on_resume_pressed():
 	main_theme.play(main_theme_time)
@@ -158,3 +146,15 @@ func _on_stone_spawner_timeout():
 		return
 	spawner.spawn_object_at_end(stone_type, true)
 	$DependentTimers/StoneSpawner.start()
+
+func _on_TutorialButton_pressed():
+	GameState.seen_tutorial = true
+	$"%TutorialScreen".visible = false
+	$"%Time".visible = true
+
+func _on_Player_player_started_game():
+	for timer in $Timers.get_children():
+		timer.start()
+	
+	main_theme.play(main_theme_time)
+	GameState.game_started = true

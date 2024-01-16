@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/ui/Leaderboard.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="Leaderboard" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -200.0
+margin_right = 175.0
+margin_bottom = 200.0
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -60.0
+margin_right = 175.0
+margin_bottom = 60.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="LaderboardContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 330.0
+margin_bottom = 128.0
+custom_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/LaderboardContainer"]
+margin_right = 310.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "LEADER BOARD"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/LaderboardContainer"]
+margin_top = 37.0
+margin_right = 310.0
+margin_bottom = 53.0
+custom_constants/separation = 16
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/LaderboardContainer"]
+margin_top = 58.0
+margin_right = 310.0
+margin_bottom = 74.0
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LaderboardContainer"]
+margin_top = 79.0
+margin_right = 310.0
+margin_bottom = 128.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/LaderboardContainer/MarginContainer"]
+margin_right = 310.0
+margin_bottom = 49.0
+custom_constants/separation = 5
+
+[node name="AlreadySubmitted" type="Label" parent="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_right = 310.0
+margin_bottom = 14.0
+text = "Highscore Already Submitted"
+align = 1
+valign = 1
+
+[node name="SubmitContainer" type="HBoxContainer" parent="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 310.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+
+[node name="PlayerName" type="LineEdit" parent="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer/SubmitContainer"]
+unique_name_in_owner = true
+margin_right = 150.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+placeholder_text = "Your Name"
+
+[node name="SubmitButton" type="Button" parent="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer/SubmitContainer"]
+unique_name_in_owner = true
+margin_left = 160.0
+margin_right = 310.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Submit"
+
+[node name="Button" type="Button" parent="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 310.0
+margin_bottom = 49.0
+text = "Retry"
+
+[connection signal="text_changed" from="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer/SubmitContainer/PlayerName" to="." method="_on_PlayerName_text_changed"]
+[connection signal="pressed" from="MarginContainer/LaderboardContainer/MarginContainer/VBoxContainer/SubmitContainer/SubmitButton" to="." method="_on_SubmitButton_pressed"]
