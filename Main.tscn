@@ -173,6 +173,14 @@ visible = false
 
 [node name="TutorialScreen" parent="UI" instance=ExtResource( 9 )]
 
+[node name="VBoxContainer" parent="UI/TutorialScreen" index="1"]
+margin_top = 35.0
+margin_bottom = 315.0
+
+[node name="TutorialButton" parent="UI/TutorialScreen/VBoxContainer" index="1"]
+margin_bottom = 280.0
+rect_min_size = Vector2( 0, 50 )
+
 [node name="CompletionContainer" type="MarginContainer" parent="UI"]
 anchor_left = 1.0
 anchor_top = 0.5
