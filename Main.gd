@@ -17,6 +17,7 @@ var main_theme_total_time = 2 * 60 + 32
 var stone_type = "Stone"
 var spawned_end_screen = false
 
+
 func _ready():
 	progress_bar.max_value = main_theme_total_time
 	
@@ -35,7 +36,7 @@ func _process(_delta):
 	
 	var player_speed = GameState.move_speed_y / 1000.0 * 2
 	max_player_speed = max(max_player_speed, player_speed)
-	speed_label.text = "%.2f mps"%player_speed
+	speed_label.text = "%.2f"%player_speed
 	
 	distance += GameState.move_speed_y / 1e4 
 	main_theme_time = main_theme.get_playback_position()
@@ -138,6 +139,8 @@ func _on_TutorialButton_pressed():
 	GameState.seen_tutorial = true
 	$"%TutorialScreen".visible = false
 	$"%Time".visible = true
+	$"%LeftButtons".visible = true
+	$"%RightButtons".visible = true
 
 func _on_Player_player_started_game():
 	for timer in $Timers.get_children():

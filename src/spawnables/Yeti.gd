@@ -16,5 +16,5 @@ func _process(delta):
 	position = position.move_toward(GameState.player_position, delta * yeti_speed)
 
 func _on_Yeti_area_entered(area):
-	$Sprite2D.visible = false
-	$Sprite2D2.visible = true
+	$AnimatedSprite.visible = false
+	$Sprite.visible = true

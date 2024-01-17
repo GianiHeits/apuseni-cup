@@ -8,7 +8,7 @@ func _process(delta):
 		return
 	
 	time += delta
-	var mils = fmod(time, 1) * 1000
+	var mils = fmod(time, 1) * 100
 	var secs = fmod(time, 60)
 	var mins = fmod(time, 60*60) / 600
 	

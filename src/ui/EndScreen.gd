@@ -3,10 +3,6 @@ extends Panel
 export(NodePath) onready var leaderboard_path = get_node(leaderboard_path)
 
 
-func _input(event):
-	if event.is_action_pressed("ui_accept") and GameState.game_over:
-		GameState._on_reset_button_pressed()
-
 func _on_game_over():
 	visible = true
 	
